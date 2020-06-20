@@ -1,19 +1,32 @@
-在 webpack 中使用 Vue Router:
-1. 在 main.js 中导入 vue ，然后引出一个 vue 实例 (import Vue from 'vue')
-2. 然后再写一个组件，再在 main.js 中导入这个组件 (import app from './App.vue')
-   导入vue组件的时候，记得路径要给对，不然会出错
-3. 就是安装 vue-router 插件使用 cnpm i vue-router -S
-4. 安装完成之后，那就要拿来用了，在 main.js 文件中，在导入 vue 的下方，我们也要导入 vue-router 包
-   import VueRouter from 'vue-router',导入之后，那么就要手动安装 VueRouter 使用 use
-   Vue.use(VueRouter)
-5. 创建路由对象，var routerObj = new VueRouter({routes:[{path:'路径'，component:对应的导入的组件}]})
-6. 把一些 路由 组件 弄到 路由对象里面去，最后再把 路由对象 给挂载到 vm 中去，也就是页面中
-7. 挂载到 vm 中去 的时候，因为 render 会把 el 指定的容器中，所有的内容都清空覆盖，所以 不要 把路由的
-   router-view 和 router-link 直接写到 el 所控制的元素中去
-8. 在组件中使用样式：如果你想要这个样式只在这个组件中的有效，而不是全局都有效，那么你要再这个组件中的 style 中加一个属性
-   为 scoped 才能在这个组件有效，其他组件中无效
-9. 普通的 style 标签只支持 普通的样式，如果想要启用 scss 和 less，则需要为 style 元素，设置 lang 属性 格式为
-   lang="scss"
-10. 注意：只要我们的 style 标签，是在 .vue 组件中定义的，那么，推荐都为 style 开启 scoped 属性
-11. scoped的原理：
-    是通过 css 的属性选择器实现的，就是 vue 自动给 css 添加一个 属性选择器，而这个属性是独一无二的
+1. Mint UI 和 Bootstrap 的区别：
+Mint UI 是基于 vue.js 封装出来的组件库
+Bootstrap 不是组件库，是一种类似于代码片段的东西
+
+2. Mint UI的安装：
+# Vue 1.x
+npm install mint-ui@1 -S
+# Vue 2.0
+npm install mint-ui -S
+
+3. 导入Mint UI组件：
+   3.1 引入全部组件
+   import Vue from 'vue';
+   import Mint from 'mint-ui';
+   Vue.use(Mint);// 将 MintUI 注册到 vue 上
+   3.2 按需引入部分组件
+   import { Cell, Checklist } from 'mint-ui';
+   Vue.component(Cell.name, Cell);
+   Vue.component(Checklist.name, Checklist);
+
+4. 因为在 main.js 中导入了全部组件[import Vue from 'vue';], 又因为把所有组件注册为全局组件[Vue.use(Mint);]
+   所以在其他组件中使用 MintUI 里面的 css component 的组件部分，可以不用导入组件，就可以直接使用了。
+   因为 css component 里面的组件是直接用 标签形式显示的，如<mt-button></mt-button>
+   但是，如果是要使用 MintUI 里面的 js component 的部分组件，那就要重新 按需导入自己需要的 组件了。
+   这个 js component 里面的就不是用标签形式来显示的，而是一些事件或者是一些方法，所以要在当前页面重新按需导入
+   比如导入Toast事件：import { Toast } from 'mint-ui';
+
+5. 由于我安装了bootstrap，但是图标还是不显示，所以我下载了低版本的bootstrap3.3.7版本，在bootstrap里面才会
+   出现fonts文件夹，图标才会出现
+
+6. 要求：进入一个页面，这个页面正在请求后台数据，这时候在页面应该显示一个 loading 效果，正在加载中。。。
+   当数据获取回来后，loading 图片消失，我们可以用 Toast 的 duration 等于 -1 来模拟情况
