@@ -26,7 +26,7 @@ npm install mint-ui -S
    比如导入Toast事件：import { Toast } from 'mint-ui';
 
 5. 由于我安装了bootstrap，但是图标还是不显示，所以我下载了低版本的bootstrap3.3.7版本，在bootstrap里面才会
-   出现fonts文件夹，图标才会出现
+   出现fonts文件夹，图标才会出现的
 
 6. 要求：进入一个页面，这个页面正在请求后台数据，这时候在页面应该显示一个 loading 效果，正在加载中。。。
    当数据获取回来后，loading 图片消失，我们可以用 Toast 的 duration 等于 -1 来模拟情况
